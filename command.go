@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"strings"
 
 	discord "github.com/bwmarrin/discordgo"
@@ -16,6 +17,7 @@ var commands = make(map[string]Command)
 
 func RegisterCommands() {
 	commands[".doot"] = Command{"doot", "doots", DootCommand}
+	commands[".spookify"] = Command{"spookify", "make your name spooky", SpookifyCommand}
 }
 
 func ParseCommands(s *discord.Session, m *discord.MessageCreate) {
@@ -29,6 +31,7 @@ func ParseCommands(s *discord.Session, m *discord.MessageCreate) {
 
 	returned, ok := commands[command]
 	if !ok {
+		fmt.Println("is not ok " + command)
 		return
 	}
 
