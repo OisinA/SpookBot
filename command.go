@@ -18,6 +18,8 @@ var commands = make(map[string]Command)
 func RegisterCommands() {
 	commands[".doot"] = Command{"doot", "doots", DootCommand}
 	commands[".spookify"] = Command{"spookify", "make your name spooky", SpookifyCommand}
+	commands[".scareme"] = Command{"scareme", "be scared", ScareMeCommand}
+	commands[".spook"] = Command{"spook", "spook your friends!", SpookCommand}
 }
 
 func ParseCommands(s *discord.Session, m *discord.MessageCreate) {
