@@ -32,6 +32,8 @@ func main() {
 		log.Fatal(err)
 	}
 
+	session.AddHandler(ParseCommands)
+
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, syscall.SIGSEGV, syscall.SIGHUP)
 	<-sc
