@@ -20,6 +20,7 @@ func RegisterCommands() {
 	commands[".scareme"] = Command{"scareme", "be scared", ScareMeCommand}
 	commands[".spook"] = Command{"spook", "spook your friends!", SpookCommand}
 	commands[".future"] = Command{"future", "predict your future", FutureCommand}
+	commands[".help"] = Command{"help", "help your spooks", HelpCommand}
 }
 
 func ParseCommands(s *discord.Session, m *discord.MessageCreate) {
@@ -38,4 +39,21 @@ func ParseCommands(s *discord.Session, m *discord.MessageCreate) {
 
 	returned.Execute(s, m, strings.Join(split[1:], " "))
 	return
+}
+
+func HelpCommand(s *discord.Session, m *discord.MessageCreate, message string) {
+	if len(message) == 0 {
+		keys := make([]string, 0, len(commands))
+		for k := range commands {
+			keys = append(keys, k)
+		}
+		s.ChannelMessageSend(m.ChannelID, "To use a command, send a message as follows: .[command]\nTo find out more about a command, use .help [command].\nAvailable commands: "+strings.Join(keys, ", "))
+	} else {
+		c, ok := commands["."+message]
+		if !ok {
+			s.ChannelMessageSend(m.ChannelID, "Command not found.")
+			return
+		}
+		s.ChannelMessageSend(m.ChannelID, "."+message+"\nDescription: "+c.Description)
+	}
 }
