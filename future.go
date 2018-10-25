@@ -11,9 +11,15 @@ func FutureCommand(s *discord.Session, m *discord.MessageCreate, message string)
 	if m.Author.Bot {
 		return
 	}
-
-	s.ChannelMessageSend(m.ChannelID, "Your future looks spooookyyyy!")
-	go SpookyFuture(s, m.Author)
+	if rand.Intn(5) < 3 {
+		s.ChannelMessageSend(m.ChannelID, "Your future looks spooookyyyy!")
+		go SpookyFuture(s, m.Author)
+	} else {
+		s.ChannelMessageSend(m.ChannelID, "Your future looks booooorrrrrinnnnggggg")
+		s.ChannelMessageSend(m.ChannelID, "Someone else's future is spooky however")
+		user := getRandomUser(s, m).User
+		go SpookyFuture(s, user)
+	}
 
 }
 
