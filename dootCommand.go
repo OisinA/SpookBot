@@ -30,5 +30,6 @@ func DootCommand(s *discord.Session, m *discord.MessageCreate, message string) {
 			},
 		},
 	}
+	fmt.Println(fmt.Sprint(ms))
 	s.ChannelMessageSendComplex(m.ChannelID, ms)
 }
