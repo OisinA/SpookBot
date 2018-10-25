@@ -12,28 +12,29 @@ func CostumeCommand(s *discord.Session, m *discord.MessageCreate, message string
 	if m.Author.Bot {
 		return
 	}
-	var ms *discord.MessageSend
+	s.ChannelMessageSend(m.ChannelID, "Here's a costume idea!")
 	switch rand.Intn(4) {
 	case 0:
-		ms = image("ghost.png")
+		image("ghost.png", m.ChannelID)
+		break
 	case 1:
-		ms = image("skeleton.png")
+		image("skeleton.png", m.ChannelID)
+		break
 	case 2:
-		ms = image("witch.png")
+		image("witch.png", m.ChannelID)
+		break
 	case 3:
-		ms = image("zombie.png")
+		image("zombie.png", m.ChannelID)
+		break
 	}
-	s.ChannelMessageSend(m.ChannelID, "Here's a costume idea!")
-	s.ChannelMessageSendComplex(m.ChannelID, ms)
 }
 
-func image(image string) *discord.MessageSend {
+func image(image string, channelID string) {
 	f, err := os.Open(image)
 	if err != nil {
 		fmt.Println("Error reading file")
-		return nil
+		return
 	}
-	defer f.Close()
 	ms := &discord.MessageSend{
 		Embed: &discord.MessageEmbed{
 			Image: &discord.MessageEmbedImage{
@@ -47,5 +48,5 @@ func image(image string) *discord.MessageSend {
 			},
 		},
 	}
-	return ms
+	session.ChannelMessageSendComplex(channelID, ms)
 }

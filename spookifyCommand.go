@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"math/rand"
+	"strings"
 
 	discord "github.com/bwmarrin/discordgo"
 )
@@ -29,7 +30,7 @@ func SpookifyCommand(s *discord.Session, m *discord.MessageCreate, message strin
 	chosenWords := []string{}
 
 	for _, i := range spookyWords {
-		if i[0] == message[0] {
+		if strings.ToUpper(string(i[0])) == string(message[0]) {
 			chosenWords = append(chosenWords, i)
 		}
 	}
