@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"strings"
 
 	discord "github.com/bwmarrin/discordgo"
@@ -34,7 +33,6 @@ func ParseCommands(s *discord.Session, m *discord.MessageCreate) {
 
 	returned, ok := commands[command]
 	if !ok {
-		fmt.Println("is not ok " + command)
 		return
 	}
 
