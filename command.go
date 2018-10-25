@@ -20,6 +20,7 @@ func RegisterCommands() {
 	commands[".spookify"] = Command{"spookify", "make your name spooky", SpookifyCommand}
 	commands[".scareme"] = Command{"scareme", "be scared", ScareMeCommand}
 	commands[".spook"] = Command{"spook", "spook your friends!", SpookCommand}
+	commands[".future"] = Command{"future", "predict your future", FutureCommand}
 }
 
 func ParseCommands(s *discord.Session, m *discord.MessageCreate) {
