@@ -12,10 +12,10 @@ type Command struct {
 	Execute     func(*discord.Session, *discord.MessageCreate, string)
 }
 
-var commands = make(map[string]command)
+var commands = make(map[string]Command)
 
 func RegisterCommands() {
-
+	commands[".doot"] = Command{"doot", "doots", DootCommand}
 }
 
 func ParseCommands(s *discord.Session, m *discord.MessageCreate) {
